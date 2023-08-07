@@ -244,7 +244,7 @@ public class giaoDien extends JFrame implements ActionListener,Subscriber{
 	private void addHoaDon(){
 		if(txt_maHoaDon.getText().equals("")||txt_donGia.getText().equals("")||txt_maPhong.getText().equals("")|
 				txt_ngayLapHoaDon.getText().equals("")||
-				txt_tenKhachHang.getText().equals("accessibleContext")
+				txt_tenKhachHang.getText().equals("")
 				) {
 			JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin đầy đủ");
 		}else{
