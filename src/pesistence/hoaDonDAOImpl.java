@@ -10,7 +10,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-// hieu dinh qua em oi
+
 import Domain.Model.hoaDon;
 import Domain.Model.hoaDonGio;
 import Domain.Model.hoaDonNgay;

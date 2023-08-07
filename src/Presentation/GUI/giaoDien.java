@@ -251,43 +251,35 @@ public class giaoDien extends JFrame implements ActionListener,Subscriber{
 
 			String date =txt_ngayLapHoaDon.getText();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			tenKhachHang = txt_tenKhachHang.getText();
+			maPhong =Integer.parseInt(txt_maPhong.getText());
+			donGia = Double.parseDouble(txt_donGia.getText());
 			try {
 				dateFormat.setLenient(false);
 				ngayLapHoaDon = dateFormat.parse(date);
 
 				int year = Calendar.getInstance().get(Calendar.YEAR);
 
-				tenKhachHang = txt_tenKhachHang.getText();
-				maPhong =Integer.parseInt(txt_maPhong.getText());
-				donGia = Double.parseDouble(txt_donGia.getText());
-				if(txt_soGioThue.getText().isEmpty()){
-					soNgayThue = Integer.parseInt(txt_soNgayThue.getText());	
-					Calendar calendar = Calendar.getInstance();
-					calendar.setTime(ngayLapHoaDon);
-					int nhapyear = calendar.get(Calendar.YEAR);
-					if(nhapyear>year){
-						   JOptionPane.showMessageDialog(null, "Năm không hợp lệ");
-					} else{
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(ngayLapHoaDon);
+				int nhapyear = calendar.get(Calendar.YEAR);
+				if(nhapyear>year){
+                       JOptionPane.showMessageDialog(null, "Năm không hợp lệ");
+				}else{
 
+					if(txt_soGioThue.getText().isEmpty()){
+						soNgayThue = Integer.parseInt(txt_soNgayThue.getText());	
 						hoaDonNgay hoaDonNgay = new hoaDonNgay(maHoaDon, ngayLapHoaDon, tenKhachHang, maPhong, donGia, soNgayThue);
 						commandProcessor.execute(new addCommand(hoaDonService, hoaDonNgay));
 					}
-				}
-				else{
-					soGioThue = Integer.parseInt(txt_soGioThue.getText());
-					soNgayThue = Integer.parseInt(txt_soNgayThue.getText());	
-					Calendar calendar = Calendar.getInstance();
-					calendar.setTime(ngayLapHoaDon);
-					int nhapyear = calendar.get(Calendar.YEAR);
-					if(nhapyear>year){
-						   JOptionPane.showMessageDialog(null, "Năm không hợp lệ");
-					} else{
-					hoaDonGio hoaDonGio = new hoaDonGio(1, ngayLapHoaDon, tenKhachHang, maPhong, donGia, soGioThue);
-					commandProcessor.execute(new addCommand(hoaDonService, hoaDonGio));
+					else{
+						soGioThue = Integer.parseInt(txt_soGioThue.getText());
+						hoaDonGio hoaDonGio = new hoaDonGio(1, ngayLapHoaDon, tenKhachHang, maPhong, donGia, soGioThue);
+						commandProcessor.execute(new addCommand(hoaDonService, hoaDonGio));
 					}
+					loadHoaDon();
+					clearTextField();
 				}
-				loadHoaDon();
-				clearTextField();
 			} catch (ParseException e) {
 				//e.printStackTrace();
 				JOptionPane.showMessageDialog(null,"Sai định dạng");
